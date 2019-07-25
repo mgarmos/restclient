@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
+import { Post } from './post';
 
 
 @Component({
@@ -12,14 +13,18 @@ export class AppComponent {
   // Contiene los post que se van a recoger del servicio
   posts = [];
 
-  title = 'restClient';
-
   constructor(private service: DataService) {
-    console.log('He entrado');
     this.service.getData().subscribe(data =>  {
       this.posts = data;
     });
-    console.log('He salido');
+  }
+
+  onSelect(post: Post): void {
+    for (let i = 0; i < this.posts.length; i++) {
+      if (post.id === this.posts[i].id) {
+        this.posts.splice(i, 1);
+      }
+    }
   }
 
 }

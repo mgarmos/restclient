@@ -51,4 +51,6 @@ V0.1
 
 11- Modifico app.component.html para que muestre todos los post
 
+12- Añado un evento click sobre cada componente
+
 
