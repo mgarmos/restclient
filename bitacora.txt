@@ -1,0 +1,54 @@
+Objetivo
+- Crear un cliente rest mcon angular.json 
+
+-------------------------------
+V0.1
+- Crear el cliente Angular que lea de a free online REST API: https://jsonplaceholder.typicode.com/posts
+-------------------------------
+
+1- Crear un servicio: Clase con métodos que vamos a poder reutilizar en cualquier parte de nuetra aplicación
+    - Desde consola: ng generate service data
+        CREATE src/app/data.service.spec.ts (323 bytes)
+        CREATE src/app/data.service.ts (133 bytes)
+
+2- En DataService
+    - Importamos el módulo Http y de él la clase HttpClient que permite manejar un cliente http
+    - Añadimos la clase al constructor para que pueda hacer uso de ella.
+    Para probar la visibilidad del servicio, añado al cosntructor console.log(...), referencio desde un 
+    componente y reviso la consola.
+    
+3- En app.module.ts añado la dependencia en app.module.ts   
+    - Importo en la cabecera.  Aparece en otro color porque no se está utilizando
+    - Declaro la clase DataService en providers
+    - Importo  HttpModule y lo declaro en imports (Porque DataService tiene dependencia de HttpModule)
+
+
+4- en app.component.ts 
+    - creo un array vacío que va a contener todos los post
+    - Importo el servicio import { DataService } from './data.service';
+    - Lo hago disponible para el componente pasándolo en el constructor
+
+5- Pruebo todo lo hecho hasta ahora:
+    npm start -> Project is running at http://localhost:4200/
+    Ok. Se muestra la página por defecto y en la consola aparecen los logs del los constructores
+
+6- Creo en DataService el método que va a obtener los datos getData()
+    - Hago petición Http get mediante httpClient
+
+7- Creo una interfax(modelo) que encapsule un post. -> ng generate interface Post
+    - Creo un fichero Post.ts con los atributos
+    - Lo importo desde DataService que es dónde lo voy a utilizar
+
+8- En app.component llamamos al método DataService desde el constructor mediante suscribe(data) que nos va 
+   a traer los datos que estamo recibiendo:
+          this.service.getData().subscribe(data =>  { 
+              console.log(data);
+          });
+
+9- Pruebo. OK. En consola aparece los post
+
+10- Cargo el array de posts con los datos obtenidos this.posts = data
+
+11- Modifico app.component.html para que muestre todos los post
+
+
